@@ -1,0 +1,17 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Book {
+  description: String!
+  id: String!
+  name: String!
+}
+
+type Mutation {
+  createBook(description: String!, name: String!): Book!
+}
+
+type Query {
+  book(id: String!): Book!
+}
