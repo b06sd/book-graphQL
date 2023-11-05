@@ -4,6 +4,7 @@ import { Book } from './book.model';
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { v4 as uuid } from 'uuid';
 import { BookDto } from './book.dto';
+import { UpdateBookDto } from './updateBook.dto';
 
 @Resolver(of => Book)
 export class BookResolver {
@@ -26,12 +27,24 @@ export class BookResolver {
   }
 
   @Mutation(returns => Book)
-  async updateBook(@Args('id') id: string, @Args('name') name: string, @Args('description') description: string): Promise<Book> {
-    return await this.bookService.updateBook(id, { name, description });
+  async updateBook(
+    @Args('id') id: string,
+    @Args('updateBookData') updateBookData: UpdateBookDto) {
+    if (id !== null)
+    {
+      const updated = this.bookService.updateBook(id, updateBookData);
+      return updated;
+    }
+    return false;
   }
 
   @Mutation(returns => String)
-  async deleteBook(@Args('id') id: string) {
-    return await this.bookService.deleteBook(id);
+  async deleteBook(@Args('id') id: string){
+    if(id !== null)
+    {
+      await this.bookService.deleteBook(id);
+      return true;
+    }
+    return false;
   }
 }
