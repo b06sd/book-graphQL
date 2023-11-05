@@ -10,8 +10,11 @@ type Book {
 
 type Mutation {
   createBook(description: String!, name: String!): Book!
+  deleteBook(id: String!): String!
+  updateBook(description: String!, id: String!, name: String!): Book!
 }
 
 type Query {
   book(id: String!): Book!
+  books: [Book!]!
 }

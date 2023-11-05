@@ -31,7 +31,7 @@ export class BookResolver {
   }
 
   @Mutation(returns => String)
-  async deleteBook(@Args('id') id: string): Promise<String> {
+  async deleteBook(@Args('id') id: string) {
     return await this.bookService.deleteBook(id);
   }
 }
