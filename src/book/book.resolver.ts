@@ -14,6 +14,11 @@ export class BookResolver{
     return await this.bookService.findOne(id);
 }
 
+@Query(returns => [Book])
+  async books():Promise<Book[]>{
+    return await this.bookService.findAll();
+}
+
 
 @Mutation(returns => Book)
   async createBook(@Args('name') name: string, @Args('description') description: string): Promise<Book>{
